@@ -1,0 +1,11 @@
+{
+  "id": "glassy-blurr",
+  "title": "Glassy Blurr",
+  "description": "A frosted glassmorphic theme featuring a deep ambient blurred background, a floating macOS-style pill player dock, and depth-of-field lyric focus.",
+  "creators": ["direjoker006"],
+  "minVersion": "2.0.5.6",
+  "hasShaders": false,
+  "version": "1.0.0",
+  "tags": ["dark", "glass", "blur", "minimal", "dock"],
+  "images": ["1.png"]
+}
