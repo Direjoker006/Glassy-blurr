@@ -1,0 +1,131 @@
+/* Glassy Blurr, a custom theme for BetterLyrics */
+
+/* blyrics-target-scroll-pos-ratio = 0.42; blyrics-swipe-lead-ratio = 0.08; blyrics-swipe-duration-ratio = 1.15; blyrics-letter-wave = true; blyrics-line-scroll-duration = 580ms; */
+
+:root {
+  /* Typography */
+  --blyrics-default-font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Inter, sans-serif;
+  --blyrics-font-size: 2.9rem;
+  --blyrics-font-weight: 750;
+  --blyrics-line-height: 1.32;
+  --blyrics-translated-font-size: 1.65rem;
+  --blyrics-translated-font-weight: 500;
+
+  /* Word-to-Word Karaoke & Colors */
+  --blyrics-lyric-active-color: #ffffff;
+  --blyrics-lyric-inactive-color: rgba(255, 255, 255, 0.24);
+  --blyrics-translated-color: rgba(255, 255, 255, 0.55);
+  --blyrics-glow-color: rgba(255, 255, 255, 0.65);
+
+  /* Smooth Scaling & Spacing */
+  --blyrics-scale: 0.93;
+  --blyrics-active-scale: 1.03;
+  --blyrics-scale-transition-duration: 0.22s;
+  --blyrics-padding: 1.4rem;
+
+  /* Sustain-Style Rich Ambient Background */
+  --blyrics-blur-amount: 45px;
+  --blyrics-background-blur: 140px;
+  --blyrics-background-saturate: 2.6;
+
+  /* Tight Word-by-Word Karaoke Sweep */
+  --blyrics-lyric-scroll-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  --blyrics-highlight-glow-radius-from: 1.1rem;
+  --blyrics-letter-wave-transform: translateY(-0.05em);
+  --blyrics-letter-wave-emphasis-scale: 1.1;
+}
+
+/* 1. SUSTAIN STYLE AMBIENT BACKGROUND (Deep, Vibrant, Smooth Mesh Feel) */
+ytmusic-player-page:before {
+  filter: saturate(var(--blyrics-background-saturate)) brightness(36%) contrast(115%) blur(var(--blyrics-background-blur)) !important;
+  transform: scale(1.4) !important;
+  transition: background-image 1.2s ease, filter 1.2s ease !important;
+}
+
+ytmusic-player-page::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 50% 35%, rgba(255, 255, 255, 0.04) 0%, rgba(5, 5, 10, 0.72) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 2. FLOATING DOCK PLAYER BAR (macOS / BitChord Pill Dock) */
+ytmusic-player-bar {
+  position: fixed !important;
+  bottom: 18px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: min(92%, 1180px) !important;
+  height: 74px !important;
+  border-radius: 24px !important;
+  background: rgba(18, 18, 24, 0.58) !important;
+  backdrop-filter: blur(36px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(36px) saturate(200%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+  padding: 0 18px !important;
+  z-index: 999 !important;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+ytmusic-player-bar:hover {
+  background: rgba(24, 24, 32, 0.72) !important;
+  border-color: rgba(255, 255, 255, 0.22) !important;
+  transform: translateX(-50%) translateY(-2px) !important;
+}
+
+#player-bar-background {
+  display: none !important;
+}
+
+/* Progress Bar inside Floating Dock */
+#progress-bar.ytmusic-player-bar {
+  top: 0px !important;
+  width: calc(100% - 36px) !important;
+  left: 18px !important;
+  border-radius: 999px !important;
+  overflow: hidden !important;
+}
+
+/* 3. WORD-TO-WORD SYNC & DEPTH FOCUS */
+.blyrics-container > div:not(.blyrics--active):not(.blyrics--animating) {
+  filter: blur(1.4px);
+  opacity: 0.42;
+  transition: filter 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+
+.blyrics-container > div:hover {
+  filter: blur(0px) !important;
+  opacity: 0.92 !important;
+}
+
+.blyrics-container > div.blyrics--active,
+.blyrics-container > div.blyrics--animating {
+  filter: blur(0px) !important;
+  opacity: 1 !important;
+}
+
+/* Extra Padding at Bottom so Lyrics don't hide behind the Floating Dock */
+.blyrics-container {
+  padding-bottom: 130px !important;
+}
+
+/* Rounded Album Art Card */
+ytmusic-player-page:not([video-mode]) #player.ytmusic-player-page {
+  border-radius: 22px !important;
+  overflow: hidden !important;
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.65) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Glass Pill Footer & Autoscroll Button */
+.blyrics-footer__container,
+.autoscroll-resume-button {
+  background: rgba(255, 255, 255, 0.09) !important;
+  backdrop-filter: blur(18px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border-radius: 999px !important;
+  margin-bottom: 85px !important;
+}
